@@ -3,7 +3,7 @@ class BoardsController < ApplicationController
 
   # GET /boards or /boards.json
   def index
-    @boards = Board.all
+    @boards = current_user.boards.all
   end
 
   # GET /boards/1 or /boards/1.json
@@ -12,7 +12,7 @@ class BoardsController < ApplicationController
 
   # GET /boards/new
   def new
-    @board = Board.new
+    @board = current_user.boards.new
   end
 
   # GET /boards/1/edit
@@ -21,7 +21,7 @@ class BoardsController < ApplicationController
 
   # POST /boards or /boards.json
   def create
-    @board = Board.new(board_params)
+    @board = current_user.boards.new(board_params)
 
     respond_to do |format|
       if @board.save
@@ -60,11 +60,11 @@ class BoardsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_board
-      @board = Board.find(params[:id])
+      @board = current_user.boards.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def board_params
-      params.require(:board).permit(:user_id, :name)
+      params.require(:board).permit(:name)
     end
 end
