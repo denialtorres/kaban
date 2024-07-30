@@ -1,14 +1,30 @@
-<p style="color: green"><%= notice %></p>
+<h1>Board</h1>
 
-<h1>Boards</h1>
+<table class='table'>
+  <thead>
+    <th>User</th>
+    <th>Name</th>
 
-<div id="boards">
-  <% @boards.each do |board| %>
-    <%= render board %>
-    <p>
-      <%= link_to "Show this board", board %>
-    </p>
-  <% end %>
-</div>
+    <th colspan=3>Actions</th>
+  </thead>
+  <tbody>
+    <% @boards.each do |board| %>
+      <tr>
+        <td><%= board.user_id %></td>
+        <td><%= board.name %></td>
+
+        <td><%= link_to "Show", board_path(board) %></td>
+        <td><%= link_to "Edit", edit_board_path(board) %></td>
+        <td>
+          <%= link_to "Delete", board_path(board),
+            "data-turbo-method": :delete,
+            "data-turbo-confirm": "Are you sure?" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
 
 <%= link_to "New board", new_board_path %>

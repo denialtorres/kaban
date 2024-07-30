@@ -6,8 +6,12 @@
     <div class="row">
       <% board.columns.order(position: :asc).each do |column| %>
           <div class="col-md-4">
-            <% column.cards.order(position: :asc).each do |card| %>
-                <%= render partial: "cards/card", locals: { board: board, column: column, card: card } %>
+            <h2><%= column.name %></h2>
+
+            <%= turbo_frame_tag dom_id(column, "cards") do %>
+                <% column.cards.order(position: :asc).each do |card| %>
+                    <%= render partial: "cards/card", locals: { board: board, column: column, card: card } %>
+                <% end %>
             <% end %>
 
             <%= render partial: "cards/new_link", locals: { board: board, column: column } %>
