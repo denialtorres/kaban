@@ -1,3 +1,3 @@
 <%= turbo_frame_tag dom_id(column, "cards_new") do %>
-    <%= link_to "New Card", new_board_column_card_path(board, column) %>
+    <%= link_to "New Card", new_board_column_card_path(board, column), class: "btn btn-outline-primary btn-sm mt-2" %>
 <% end %>

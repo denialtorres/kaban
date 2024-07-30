@@ -1,20 +1,24 @@
-<div id="<%= dom_id board %>">
-    <h1>
+<div id="<%= dom_id board %>" class="container my-5">
+    <h1 class="display-4 text-center my-4">
       <%= board.name %>
     </h1>
 
     <div class="row">
       <% board.columns.order(position: :asc).each do |column| %>
-          <div class="col-md-4">
-            <h2><%= column.name %></h2>
-
-            <%= turbo_frame_tag dom_id(column, "cards") do %>
-                <% column.cards.order(position: :asc).each do |card| %>
-                    <%= render partial: "cards/card", locals: { board: board, column: column, card: card } %>
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0">
+              <div class="card-header bg-transparent">
+                <h2 class="h5 mb-0"><%= column.name %></h2>
+              </div>
+              <div class="card-body">
+                <%= turbo_frame_tag dom_id(column, "cards") do %>
+                    <% column.cards.order(position: :asc).each do |card| %>
+                        <%= render partial: "cards/card", locals: { board: board, column: column, card: card } %>
+                    <% end %>
                 <% end %>
-            <% end %>
-
-            <%= render partial: "cards/new_link", locals: { board: board, column: column } %>
+                <%= render partial: "cards/new_link", locals: { board: board, column: column } %>
+              </div>
+            </div>
           </div>
       <% end %>
     </div>
