@@ -3,7 +3,7 @@ class Board < ApplicationRecord
 
   has_many :columns, dependent: :destroy
 
-  after_create :create_default_columns
+  after_create :create_default_colums
 
   private
 
