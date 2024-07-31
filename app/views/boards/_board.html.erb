@@ -3,9 +3,9 @@
       <%= board.name %>
     </h1>
 
-    <div class="row">
+    <div class="row" data-controller="kanban-board">
       <% board.columns.order(position: :asc).each do |column| %>
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4" data-kanban-board-target="column" data-column-id=<%= column.id %>>
             <div class="card shadow-sm border-0">
               <div class="card-header bg-transparent">
                 <h2 class="h5 mb-0"><%= column.name %></h2>
